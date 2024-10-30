@@ -4,6 +4,8 @@
 
 # the logging things
 import logging
+import time  # Import time module for synchronization handling
+
 logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -20,10 +22,14 @@ import pyrogram
 logging.getLogger("pyrogram").setLevel(logging.WARNING)
 
 
-if __name__ == "__main__" :
+if __name__ == "__main__":
     # create download directory, if not exist
     if not os.path.isdir(Config.DOWNLOAD_LOCATION):
         os.makedirs(Config.DOWNLOAD_LOCATION)
+    
+    # Introduce a small delay for time synchronization
+    time.sleep(2)  # Adjust the duration if necessary
+
     plugins = dict(
         root="plugins"
     )
@@ -35,4 +41,6 @@ if __name__ == "__main__" :
         plugins=plugins
     )
     Config.AUTH_USERS.add(1484670284)
+
+    # Start the app
     app.run()
